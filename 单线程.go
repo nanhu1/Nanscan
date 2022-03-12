@@ -65,12 +65,9 @@ func Fetchbody(resp *FetchResult) {
 	fofajson, _ := Parse("fofa.json")
 
 	for _, fp := range fofajson {
-		//fofa指纹中的最后一项
 		rules := fp.Rules
-		matchFlag := false
-		//对每个json的最后一项进行迭代
-		for _, onerule := range rules {
-			//控制继续器
+		matchFlag := false		
+		for _, onerule := range rules {	
 			ruleMatchContinueFlag := true
 
 			for _, rule := range onerule {
@@ -205,17 +202,13 @@ func main() {
 	var (
 		Url     string
 		File    string
-		Threads int
 	)
 
-	fmt.Println("(-U=<targetUrl> | -F=<target File> | -T=<threads>)")
+	fmt.Println("(-U=<targetUrl> | -F=<target File> ")
 
 	flag.StringVar(&Url, "u", "", "输入url")
-	flag.StringVar(&File, "f", "", "文件内为url")
-	flag.IntVar(&Threads, "t", 10, "线程默认为10")
-
+	flag.StringVar(&File, "f", "", "文件内为url")	
 	flag.Parse()
-	//执行的函数
 	if Url != "" && File == "" {
 		req, _ := Reqdata(Url)
 		Fetchbody(req)
